@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body By Science - Træningsapp</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Homepage -->
+        <div id="homepage" class="page active">
+            <header class="app-header">
+                <h1>Body By Science</h1>
+                <div class="total-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Total Træningstid</span>
+                        <span id="total-training-time" class="stat-value">0:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="card">
+                <div class="card__header">
+                    <h2>TUT per kg Udvikling</h2>
+                </div>
+                <div class="card__body">
+                    <div class="chart-container">
+                        <canvas id="main-progress-chart" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-list">
+                <h3>Øvelser</h3>
+                <div class="exercise-grid">
+                    <!-- Exercises will be generated from JS -->
+                </div>
+            </div>
+
+            <div class="manual-input-section">
+                <h3>Manuel Data Indtastning</h3>
+                <form id="manual-data-form" class="manual-data-form">
+                    <div class="form-group">
+                        <label for="input-date">Dato:</label>
+                        <input type="date" id="input-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-weight">Vægt (kg):</label>
+                        <input type="number" id="input-weight" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-tut">TUT (sekunder):</label>
+                        <input type="number" id="input-tut" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-exercise">Øvelse:</label>
+                        <select id="input-exercise" required>
+                            <option value="">Vælg øvelse</option>
+                            <option value="1">Chest Press</option>
+                            <option value="2">Seated Row</option>
+                            <option value="3">Lateral Raise</option>
+                            <option value="4">Rear Delt</option>
+                            <option value="5">Leg Extension</option>
+                            <option value="6">Leg Curl</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Gem Data</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Exercise Page Template -->
+        <div id="exercise-page" class="page">
+            <header class="exercise-header">
+                <button id="back-to-home" class="btn btn--secondary">
+                    <span>Tilbage</span>
+                </button>
+                <div class="exercise-progress">
+                    <span id="exercise-progress-text">Øvelse 1 af 6</span>
+                </div>
+            </header>
+
+            <div class="exercise-info">
+                <h2 id="exercise-name">Øvelsesnavn</h2>
+                <div class="exercise-details">
+                    <div class="detail-box">
+                        <span class="detail-label">Muskelgrupper:</span>
+                        <span id="muscle-groups" class="detail-value"></span>
+                    </div>
+                    <div class="detail-box bfr-box">
+                        <span class="detail-label">BFR:</span>
+                        <span id="bfr-info" class="detail-value"></span>
+                        <div id="bfr-protocol" class="bfr-protocol"></div>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-label">Instruktioner:</span>
+                        <span id="exercise-instructions" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weight-input-container">
+                <h3>Vægtindstilling</h3>
+                <div class="weight-input">
+                    <button id="decrease-weight" class="btn btn--secondary weight-btn">-</button>
+                    <input type="number" id="weight-value" class="form-control" value="10" min="1">
+                    <button id="increase-weight" class="btn btn--secondary weight-btn">+</button>
+                    <span class="weight-unit">kg</span>
+                </div>
+            </div>
+
+            <div class="timer-container">
+                <div class="timer-display">
+                    <div id="countdown-display" class="countdown-display">Klar</div>
+                    <div id="timer-value" class="timer-value">0</div>
+                    <div id="timer-status" class="timer-status">Inaktiv</div>
+                </div>
+                <div class="timer-controls">
+                    <button id="start-timer" class="btn btn--primary timer-btn">Start Timer</button>
+                    <button id="stop-timer" class="btn btn--secondary timer-btn" disabled>Stop</button>
+                    <button id="save-performance" class="btn btn--primary save-btn" disabled>Gem Præstation</button>
+                </div>
+            </div>
+
+            <div class="card mt-8">
+                <div class="card__header">
+                    <h3>TUT per kg Udvikling</h3>
+                </div>
+                <div class="card__body">
+                    <div class="chart-container">
+                        <canvas id="exercise-progress-chart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button id="prev-exercise" class="btn btn--secondary nav-btn">Forrige Øvelse</button>
+                <button id="next-exercise" class="btn btn--primary nav-btn">Næste Øvelse</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="beep-sound" src="data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAFAAAGUACFhYWFhYWFhYWFhYWFhYWFhYWFvb29vb29vb29vb29vb29vb29vb3T09PT09PT09PT09PT09PT09PT0+np6enp6enp6enp6enp6enp6enp//////////////////////////8AAAAKTEFNRTMuMTAwBEgAAAAAAAAAABUgJAMGQQABmgAABlAi2cSJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//sQxAADwAABpAAAACAAADSAAAAETEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ=="></audio>
+    <script src="app.js"></script>
+</body>
+</html>
