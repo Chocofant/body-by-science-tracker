@@ -1050,6 +1050,7 @@
                 this.tutTimer = null;
                 this.tutSeconds = 0;
                 
+                this.loadSavedData();
                 this.init();
             }
 
@@ -1057,6 +1058,58 @@
                 this.bindEvents();
                 this.updateHomeExerciseStats();
                 this.renderProgressChart();
+            }
+
+            loadSavedData() {
+                try {
+                    // Load historical data
+                    const savedHistoricalData = localStorage.getItem('bodyByScience_historicalData');
+                    if (savedHistoricalData) {
+                        this.historicalData = JSON.parse(savedHistoricalData);
+                    }
+
+                    // Load workout tonnage history
+                    const savedTonnageHistory = localStorage.getItem('bodyByScience_workoutTonnageHistory');
+                    if (savedTonnageHistory) {
+                        this.workoutTonnageHistory = JSON.parse(savedTonnageHistory);
+                    }
+
+                    // Load and update exercise last values
+                    const savedExerciseData = localStorage.getItem('bodyByScience_exerciseData');
+                    if (savedExerciseData) {
+                        const exerciseData = JSON.parse(savedExerciseData);
+                        this.exercises.forEach(exercise => {
+                            if (exerciseData[exercise.id]) {
+                                exercise.lastWeight = exerciseData[exercise.id].lastWeight;
+                                exercise.lastTut = exerciseData[exercise.id].lastTut;
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error loading saved data:', error);
+                }
+            }
+
+            saveData() {
+                try {
+                    // Save historical data
+                    localStorage.setItem('bodyByScience_historicalData', JSON.stringify(this.historicalData));
+                    
+                    // Save workout tonnage history
+                    localStorage.setItem('bodyByScience_workoutTonnageHistory', JSON.stringify(this.workoutTonnageHistory));
+                    
+                    // Save exercise last values
+                    const exerciseData = {};
+                    this.exercises.forEach(exercise => {
+                        exerciseData[exercise.id] = {
+                            lastWeight: exercise.lastWeight,
+                            lastTut: exercise.lastTut
+                        };
+                    });
+                    localStorage.setItem('bodyByScience_exerciseData', JSON.stringify(exerciseData));
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                }
             }
 
             bindEvents() {
@@ -1515,6 +1568,9 @@
                 
                 // Clear workout results for next session
                 this.workoutResults = [];
+                
+                // Save data to localStorage
+                this.saveData();
             }
 
             goHome() {
@@ -1610,6 +1666,9 @@
                 // Update home screen stats
                 this.updateHomeExerciseStats();
 
+                // Save data to localStorage
+                this.saveData();
+
                 alert('Entry added successfully!');
             }
 
@@ -1629,6 +1688,9 @@
                     
                     this.renderMemoryList();
                     this.updateHomeExerciseStats();
+                    
+                    // Save data to localStorage
+                    this.saveData();
                 }
             }
 
@@ -1650,6 +1712,10 @@
                     
                     this.renderMemoryList();
                     this.updateHomeExerciseStats();
+                    
+                    // Save cleared data to localStorage
+                    this.saveData();
+                    
                     alert('All data cleared successfully!');
                 }
             }
