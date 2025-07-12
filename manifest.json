@@ -2,20 +2,20 @@
   "name": "Body by Science Trainer",
   "short_name": "BBS Trainer",
   "description": "A workout tracking app for Body by Science training methodology",
-  "start_url": "/",
+  "start_url": "/body-by-science-tracker/",
   "display": "standalone",
   "background_color": "#1a2332",
   "theme_color": "#9cfc3c",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-192x192.png",
+      "src": "/body-by-science-tracker/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icon-512x512.png",
+      "src": "/body-by-science-tracker/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
