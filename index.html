@@ -7,7 +7,7 @@
     
     <!-- Makes it fullscreen when launched from home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -29,6 +29,18 @@
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* PWA status bar styling */
+        @media (display-mode: standalone) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                background: #9cfc3c;
+            }
+            
+            .container {
+                background: linear-gradient(135deg, #1a2332 0%, #2d4a5c 100%);
+            }
         }
 
         .container {
