@@ -1482,7 +1482,39 @@
                 // Store this workout's tonnage for next time
                 this.workoutTonnageHistory.push(totalTonnage);
                 
+                // Save workout results to historical data
+                this.saveWorkoutResults();
+                
                 this.showScreen('resultsScreen');
+            }
+
+            saveWorkoutResults() {
+                // Save each workout result to historical data
+                this.workoutResults.forEach(result => {
+                    const exerciseId = this.exercises.find(ex => ex.name === result.name)?.id;
+                    if (exerciseId) {
+                        // Initialize historical data array if it doesn't exist
+                        if (!this.historicalData[exerciseId]) {
+                            this.historicalData[exerciseId] = [];
+                        }
+                        
+                        // Add the result to historical data
+                        this.historicalData[exerciseId].push({
+                            weight: parseFloat(result.weight),
+                            tut: result.tut
+                        });
+                        
+                        // Update the exercise's last values
+                        const exercise = this.exercises.find(ex => ex.id === exerciseId);
+                        if (exercise) {
+                            exercise.lastWeight = parseFloat(result.weight);
+                            exercise.lastTut = result.tut;
+                        }
+                    }
+                });
+                
+                // Clear workout results for next session
+                this.workoutResults = [];
             }
 
             goHome() {
