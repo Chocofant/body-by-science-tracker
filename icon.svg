@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#1a2332" rx="64"/>
+  
+  <!-- Gradient background circle -->
+  <defs>
+    <radialGradient id="bgGradient" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#3cfcfc;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#9cfc3c;stop-opacity:0.1"/>
+    </radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="200" fill="url(#bgGradient)"/>
+  
+  <!-- Main "BBS" text -->
+  <text x="256" y="220" font-family="SF Pro Display, -apple-system, sans-serif" 
+        font-size="120" font-weight="700" fill="#9cfc3c" text-anchor="middle">BBS</text>
+  
+  <!-- Subtitle -->
+  <text x="256" y="280" font-family="SF Pro Display, -apple-system, sans-serif" 
+        font-size="32" font-weight="400" fill="#ffffff" text-anchor="middle" opacity="0.8">TRAINER</text>
+  
+  <!-- Decorative elements - dumbbells -->
+  <g fill="#3cfcfc" opacity="0.6">
+    <!-- Left dumbbell -->
+    <rect x="80" y="180" width="20" height="60" rx="10"/>
+    <rect x="70" y="175" width="40" height="15" rx="7"/>
+    <rect x="70" y="250" width="40" height="15" rx="7"/>
+    
+    <!-- Right dumbbell -->
+    <rect x="412" y="180" width="20" height="60" rx="10"/>
+    <rect x="402" y="175" width="40" height="15" rx="7"/>
+    <rect x="402" y="250" width="40" height="15" rx="7"/>
+  </g>
+  
+  <!-- Timer/stopwatch element -->
+  <circle cx="256" cy="380" r="40" fill="none" stroke="#9cfc3c" stroke-width="4" opacity="0.7"/>
+  <circle cx="256" cy="380" r="6" fill="#9cfc3c"/>
+  <line x1="256" y1="380" x2="256" y2="350" stroke="#9cfc3c" stroke-width="3" stroke-linecap="round"/>
+  <line x1="256" y1="380" x2="280" y2="365" stroke="#9cfc3c" stroke-width="2" stroke-linecap="round"/>
+</svg>
