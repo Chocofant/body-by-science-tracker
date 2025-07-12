@@ -1017,6 +1017,9 @@
                     'calf-raise': []
                 };
 
+                // Store previous workout tonnages
+                this.workoutTonnageHistory = [];
+
                 this.currentExerciseIndex = 0;
                 this.workoutResults = [];
                 this.countdownTimer = null;
@@ -1410,7 +1413,12 @@
                 const resultsContainer = document.getElementById('todaysResults');
                 resultsContainer.innerHTML = '';
                 
+                let totalTonnage = 0;
+                
                 this.workoutResults.forEach(result => {
+                    const tonnage = parseFloat(result.weight) * result.tut;
+                    totalTonnage += tonnage;
+                    
                     const resultItem = document.createElement('div');
                     resultItem.className = 'results-item';
                     resultItem.innerHTML = `
@@ -1419,6 +1427,36 @@
                     `;
                     resultsContainer.appendChild(resultItem);
                 });
+                
+                // Get last workout tonnage
+                const lastTonnage = this.workoutTonnageHistory.length > 0 
+                    ? this.workoutTonnageHistory[this.workoutTonnageHistory.length - 1] 
+                    : 0;
+                
+                // Calculate improvement
+                const improvement = lastTonnage > 0 ? totalTonnage - lastTonnage : 0;
+                const improvementPercent = lastTonnage > 0 ? ((improvement / lastTonnage) * 100) : 0;
+                
+                // Add total tonnage with comparison
+                const tonnageItem = document.createElement('div');
+                tonnageItem.className = 'results-item';
+                tonnageItem.style.borderTop = '2px solid #9cfc3c';
+                tonnageItem.style.paddingTop = '16px';
+                tonnageItem.style.marginTop = '12px';
+                tonnageItem.innerHTML = `
+                    <div class="results-exercise" style="font-weight: 700; color: #9cfc3c;">
+                        Total Tonnage
+                        ${lastTonnage > 0 ? `<div style="font-size: 12px; font-weight: 400; color: #b8c5d1; margin-top: 4px;">Last: ${lastTonnage.toFixed(0)} kg•s</div>` : ''}
+                    </div>
+                    <div class="results-data" style="font-weight: 700; color: #9cfc3c;">
+                        ${totalTonnage.toFixed(0)} kg•s
+                        ${improvement !== 0 ? `<div style="font-size: 12px; font-weight: 400; color: ${improvement > 0 ? '#3cfcfc' : '#ff4545'}; margin-top: 4px;">${improvement > 0 ? '+' : ''}${improvement.toFixed(0)} (${improvementPercent.toFixed(1)}%)</div>` : ''}
+                    </div>
+                `;
+                resultsContainer.appendChild(tonnageItem);
+                
+                // Store this workout's tonnage for next time
+                this.workoutTonnageHistory.push(totalTonnage);
                 
                 this.showScreen('resultsScreen');
             }
@@ -1468,8 +1506,14 @@
                                 <div class="memory-stats">${entry.weight === 0 ? 'BW' : entry.weight + 'kg'} • ${entry.tut}s TUT</div>
                                 <div class="memory-date">${date.toLocaleDateString('da-DK')}</div>
                             </div>
-                            <button class="delete-button" onclick="app.deleteEntry('${exercise.id}', ${index})">Delete</button>
+                            <button class="delete-button" data-exercise-id="${exercise.id}" data-entry-index="${index}">Delete</button>
                         `;
+                        
+                        // Add event listener for delete button
+                        const deleteButton = memoryItem.querySelector('.delete-button');
+                        deleteButton.addEventListener('click', () => {
+                            this.deleteEntry(exercise.id, index);
+                        });
                         memoryList.appendChild(memoryItem);
                     });
                 });
@@ -1544,6 +1588,9 @@
                         exercise.lastWeight = null;
                         exercise.lastTut = null;
                     });
+                    
+                    // Clear workout tonnage history
+                    this.workoutTonnageHistory = [];
                     
                     this.renderMemoryList();
                     this.updateHomeExerciseStats();
