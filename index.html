@@ -169,12 +169,90 @@
             gap: 6px;
             font-size: 12px;
             color: #b8c5d1;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .legend-item.active {
+            background: rgba(156, 252, 60, 0.2);
+            color: #9cfc3c;
+            font-weight: 600;
+        }
+
+        .legend-item.dimmed {
+            opacity: 0.4;
         }
 
         .legend-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
+        }
+
+        /* Tonnage Chart Styles */
+        .tonnage-chart-container {
+            position: relative;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tonnage-chart-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tonnage-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .tonnage-stat {
+            text-align: center;
+        }
+
+        .tonnage-stat-label {
+            font-size: 11px;
+            color: #b8c5d1;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .tonnage-stat-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #9cfc3c;
+        }
+
+        .tonnage-trend {
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .tonnage-trend.positive {
+            color: #3cfcfc;
+        }
+
+        .tonnage-trend.negative {
+            color: #ff4545;
+        }
+
+        .tonnage-trend.neutral {
+            color: #b8c5d1;
         }
 
         /* Exercise List */
@@ -602,6 +680,154 @@
             color: #1a2332;
         }
 
+        /* Exercise Statistics Screen */
+        .exercise-stats-screen {
+            padding: 24px;
+            padding-top: 80px;
+            padding-bottom: 100px;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .stats-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .stats-subtitle {
+            font-size: 14px;
+            color: #9cfc3c;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .stats-container {
+            space-y: 24px;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .comparison-item {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-label {
+            font-size: 12px;
+            color: #b8c5d1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .comparison-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .comparison-change {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .comparison-change.positive {
+            color: #3cfcfc;
+        }
+
+        .comparison-change.negative {
+            color: #ff6b6b;
+        }
+
+        .comparison-change.neutral {
+            color: #b8c5d1;
+        }
+
+        .exercise-tonnage-container {
+            height: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .exercise-tonnage-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .recommendation-box {
+            background: linear-gradient(135deg, rgba(156, 252, 60, 0.1), rgba(60, 252, 252, 0.1));
+            border: 1px solid rgba(156, 252, 60, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .recommendation-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-explanation {
+            font-size: 14px;
+            color: #b8c5d1;
+            line-height: 1.4;
+        }
+
+        .continue-button {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            max-width: 327px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #9cfc3c, #3cfcfc);
+            color: #1a2332;
+            border: none;
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(156, 252, 60, 0.3);
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(156, 252, 60, 0.4);
+        }
+
         /* Results Screen */
         .results-screen {
             padding: 24px;
@@ -820,6 +1046,18 @@
                 </div>
             </div>
 
+            <div class="progress-section">
+                <h3 class="progress-title">Workout Tonnage History</h3>
+                <div class="tonnage-chart-container">
+                    <svg class="tonnage-chart-svg" id="tonnageChart" viewBox="0 0 300 120">
+                        <!-- Tonnage bar chart will be drawn here -->
+                    </svg>
+                </div>
+                <div class="tonnage-summary" id="tonnageSummary">
+                    <!-- Tonnage stats will be populated here -->
+                </div>
+            </div>
+
             <div class="exercise-section">
                 <h3 class="section-title">Today's Exercises</h3>
                 
@@ -956,6 +1194,48 @@
             </div>
         </div>
 
+        <!-- Post-Exercise Statistics Screen -->
+        <div id="exerciseStatsScreen" class="screen">
+            <div class="exercise-stats-screen">
+                <button class="back-button" id="backFromStats">←</button>
+                
+                <div class="stats-header">
+                    <h1 class="stats-title" id="statsExerciseTitle">Exercise Complete!</h1>
+                    <div class="stats-subtitle" id="statsExerciseSubtitle">Performance Analysis</div>
+                </div>
+
+                <div class="stats-container">
+                    <!-- Performance Comparison -->
+                    <div class="stats-section">
+                        <h3 class="stats-section-title">Performance Comparison</h3>
+                        <div class="comparison-grid" id="performanceComparison">
+                            <!-- Comparison data will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Exercise Tonnage Chart -->
+                    <div class="stats-section">
+                        <h3 class="stats-section-title">Tonnage History</h3>
+                        <div class="exercise-tonnage-container">
+                            <svg class="exercise-tonnage-svg" id="exerciseTonnageChart" viewBox="0 0 300 100">
+                                <!-- Exercise tonnage chart will be drawn here -->
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Recommendation -->
+                    <div class="stats-section">
+                        <h3 class="stats-section-title">Recommendation</h3>
+                        <div class="recommendation-box" id="exerciseRecommendation">
+                            <!-- Recommendation will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <button class="continue-button" id="continueWorkout">Continue to Next Exercise</button>
+            </div>
+        </div>
+
         <!-- Results Screen -->
         <div id="resultsScreen" class="screen">
             <div class="results-screen">
@@ -1049,6 +1329,7 @@
                 this.countdownTimer = null;
                 this.tutTimer = null;
                 this.tutSeconds = 0;
+                this.chartFilterExercise = null; // null means show all exercises
                 
                 this.loadSavedData();
                 this.init();
@@ -1058,6 +1339,7 @@
                 this.bindEvents();
                 this.updateHomeExerciseStats();
                 this.renderProgressChart();
+                this.renderTonnageChart();
             }
 
             loadSavedData() {
@@ -1120,6 +1402,8 @@
                 document.getElementById('backToDetail').addEventListener('click', () => this.showExerciseDetail());
                 document.getElementById('startExerciseTimer').addEventListener('click', () => this.startExerciseTimer());
                 document.getElementById('stopExercise').addEventListener('click', () => this.stopExercise());
+                document.getElementById('backFromStats').addEventListener('click', () => this.showExerciseDetail());
+                document.getElementById('continueWorkout').addEventListener('click', () => this.continueFromStats());
                 document.getElementById('finishWorkout').addEventListener('click', () => this.goHome());
                 document.getElementById('editMemoryBtn').addEventListener('click', () => this.showEditMemory());
                 document.getElementById('backToHome').addEventListener('click', () => this.goHome());
@@ -1240,8 +1524,14 @@
                     const exerciseData = this.historicalData[exercise.id];
                     if (!exerciseData || exerciseData.length === 0) return;
 
+                    // Check if this exercise should be shown
+                    const isFiltered = this.chartFilterExercise !== null;
+                    const shouldShow = !isFiltered || this.chartFilterExercise === exercise.id;
+                    const opacity = shouldShow ? '0.8' : '0.2';
+
                     // Create group for this exercise
                     const exerciseGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                    exerciseGroup.setAttribute('opacity', opacity);
 
                     // Draw line connecting points
                     if (exerciseData.length > 1) {
@@ -1254,9 +1544,8 @@
                         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                         path.setAttribute('d', pathData);
                         path.setAttribute('stroke', exercise.color);
-                        path.setAttribute('stroke-width', '2');
+                        path.setAttribute('stroke-width', shouldShow ? '3' : '2');
                         path.setAttribute('fill', 'none');
-                        path.setAttribute('opacity', '0.8');
                         exerciseGroup.appendChild(path);
                     }
 
@@ -1268,24 +1557,253 @@
                         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                         circle.setAttribute('cx', x);
                         circle.setAttribute('cy', y);
-                        circle.setAttribute('r', '4');
+                        circle.setAttribute('r', shouldShow ? '5' : '4');
                         circle.setAttribute('fill', exercise.color);
                         circle.setAttribute('stroke', '#ffffff');
-                        circle.setAttribute('stroke-width', '1');
+                        circle.setAttribute('stroke-width', shouldShow ? '2' : '1');
                         exerciseGroup.appendChild(circle);
                     });
 
                     svg.appendChild(exerciseGroup);
+                });
 
-                    // Add to legend
+                // Create legend with "All" option and exercise filters
+                // Add "All" option first
+                const allItem = document.createElement('div');
+                allItem.className = `legend-item ${this.chartFilterExercise === null ? 'active' : ''}`;
+                allItem.innerHTML = `
+                    <div class="legend-dot" style="background: linear-gradient(45deg, #9cfc3c, #3cfcfc); width: 10px; height: 10px;"></div>
+                    <span>All</span>
+                `;
+                allItem.addEventListener('click', () => this.filterChart(null));
+                legend.appendChild(allItem);
+
+                // Add exercise legend items
+                this.exercises.forEach((exercise, exerciseIndex) => {
+                    const exerciseData = this.historicalData[exercise.id];
+                    if (!exerciseData || exerciseData.length === 0) return;
+
+                    const isActive = this.chartFilterExercise === exercise.id;
+                    const isDimmed = this.chartFilterExercise !== null && !isActive;
+
                     const legendItem = document.createElement('div');
-                    legendItem.className = 'legend-item';
+                    legendItem.className = `legend-item ${isActive ? 'active' : ''} ${isDimmed ? 'dimmed' : ''}`;
                     legendItem.innerHTML = `
                         <div class="legend-dot" style="background-color: ${exercise.color}"></div>
                         <span>${exercise.shortName}</span>
                     `;
+                    legendItem.addEventListener('click', () => this.filterChart(exercise.id));
                     legend.appendChild(legendItem);
                 });
+            }
+
+            renderTonnageChart() {
+                const svg = document.getElementById('tonnageChart');
+                const summary = document.getElementById('tonnageSummary');
+                
+                // Clear existing content
+                svg.innerHTML = '';
+                summary.innerHTML = '';
+
+                // If no tonnage history, show placeholder
+                if (!this.workoutTonnageHistory || this.workoutTonnageHistory.length === 0) {
+                    const placeholderText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    placeholderText.setAttribute('x', '150');
+                    placeholderText.setAttribute('y', '60');
+                    placeholderText.setAttribute('text-anchor', 'middle');
+                    placeholderText.setAttribute('fill', '#b8c5d1');
+                    placeholderText.setAttribute('font-size', '14');
+                    placeholderText.textContent = 'Complete workouts to see tonnage history';
+                    svg.appendChild(placeholderText);
+                    
+                    summary.innerHTML = '<div class="tonnage-stat"><div class="tonnage-stat-label">No Data</div><div class="tonnage-stat-value">Complete first workout</div></div>';
+                    return;
+                }
+
+                // Chart dimensions
+                const width = 300;
+                const height = 120;
+                const margin = { top: 15, right: 15, bottom: 25, left: 40 };
+                const chartWidth = width - margin.left - margin.right;
+                const chartHeight = height - margin.top - margin.bottom;
+
+                // Get recent tonnage data (last 10 workouts max)
+                const recentData = this.workoutTonnageHistory.slice(-10);
+                const maxTonnage = Math.max(...recentData);
+                const minTonnage = Math.min(...recentData);
+                const tonnageRange = maxTonnage - minTonnage;
+                
+                // Add padding to the scale
+                const paddedMax = maxTonnage + (tonnageRange * 0.1) || maxTonnage * 1.1 || 100;
+                const paddedMin = Math.max(0, minTonnage - (tonnageRange * 0.1));
+
+                // Create scales
+                const xScale = (index) => margin.left + (index / (recentData.length - 1)) * chartWidth;
+                const yScale = (tonnage) => height - margin.bottom - ((tonnage - paddedMin) / (paddedMax - paddedMin)) * chartHeight;
+                const barWidth = Math.max(12, chartWidth / recentData.length * 0.6);
+
+                // Draw grid lines
+                const gridGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                gridGroup.setAttribute('opacity', '0.1');
+                
+                // Horizontal grid lines
+                for (let i = 0; i <= 4; i++) {
+                    const y = height - margin.bottom - (i / 4) * chartHeight;
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', margin.left);
+                    line.setAttribute('y1', y);
+                    line.setAttribute('x2', width - margin.right);
+                    line.setAttribute('y2', y);
+                    line.setAttribute('stroke', '#ffffff');
+                    gridGroup.appendChild(line);
+                }
+                svg.appendChild(gridGroup);
+
+                // Draw bars
+                recentData.forEach((tonnage, index) => {
+                    const x = margin.left + (index / Math.max(1, recentData.length - 1)) * chartWidth - barWidth / 2;
+                    const y = yScale(tonnage);
+                    const barHeight = height - margin.bottom - y;
+
+                    // Determine bar color based on trend
+                    let barColor = '#9cfc3c'; // Default green
+                    if (index > 0) {
+                        const prevTonnage = recentData[index - 1];
+                        if (tonnage > prevTonnage) {
+                            barColor = '#3cfcfc'; // Blue for improvement
+                        } else if (tonnage < prevTonnage) {
+                            barColor = '#ff6b6b'; // Red for decrease
+                        }
+                    }
+
+                    // Create gradient for bar
+                    const gradientId = `tonnageGrad${index}`;
+                    const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                    if (!svg.querySelector('defs')) svg.appendChild(defs);
+
+                    const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+                    gradient.setAttribute('id', gradientId);
+                    gradient.setAttribute('x1', '0%');
+                    gradient.setAttribute('y1', '0%');
+                    gradient.setAttribute('x2', '0%');
+                    gradient.setAttribute('y2', '100%');
+                    
+                    const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                    stop1.setAttribute('offset', '0%');
+                    stop1.setAttribute('stop-color', barColor);
+                    stop1.setAttribute('stop-opacity', '0.9');
+                    
+                    const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                    stop2.setAttribute('offset', '100%');
+                    stop2.setAttribute('stop-color', barColor);
+                    stop2.setAttribute('stop-opacity', '0.6');
+                    
+                    gradient.appendChild(stop1);
+                    gradient.appendChild(stop2);
+                    defs.appendChild(gradient);
+
+                    // Draw bar
+                    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rect.setAttribute('x', x);
+                    rect.setAttribute('y', y);
+                    rect.setAttribute('width', barWidth);
+                    rect.setAttribute('height', Math.max(2, barHeight));
+                    rect.setAttribute('fill', `url(#${gradientId})`);
+                    rect.setAttribute('rx', '3');
+                    rect.setAttribute('ry', '3');
+                    svg.appendChild(rect);
+
+                    // Add value label on top of bar
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', x + barWidth / 2);
+                    label.setAttribute('y', y - 5);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('fill', '#ffffff');
+                    label.setAttribute('font-size', '10');
+                    label.setAttribute('font-weight', '600');
+                    label.textContent = Math.round(tonnage);
+                    svg.appendChild(label);
+                });
+
+                // Draw axes
+                const axesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // X-axis
+                const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                xAxis.setAttribute('x1', margin.left);
+                xAxis.setAttribute('y1', height - margin.bottom);
+                xAxis.setAttribute('x2', width - margin.right);
+                xAxis.setAttribute('y2', height - margin.bottom);
+                xAxis.setAttribute('stroke', '#ffffff');
+                xAxis.setAttribute('stroke-width', '1');
+                xAxis.setAttribute('opacity', '0.3');
+                axesGroup.appendChild(xAxis);
+
+                // Y-axis
+                const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                yAxis.setAttribute('x1', margin.left);
+                yAxis.setAttribute('y1', margin.top);
+                yAxis.setAttribute('x2', margin.left);
+                yAxis.setAttribute('y2', height - margin.bottom);
+                yAxis.setAttribute('stroke', '#ffffff');
+                yAxis.setAttribute('stroke-width', '1');
+                yAxis.setAttribute('opacity', '0.3');
+                axesGroup.appendChild(yAxis);
+
+                // Y-axis label
+                const yLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                yLabel.setAttribute('x', 12);
+                yLabel.setAttribute('y', height / 2);
+                yLabel.setAttribute('text-anchor', 'middle');
+                yLabel.setAttribute('fill', '#b8c5d1');
+                yLabel.setAttribute('font-size', '10');
+                yLabel.setAttribute('transform', `rotate(-90, 12, ${height / 2})`);
+                yLabel.textContent = 'Tonnage';
+                axesGroup.appendChild(yLabel);
+
+                svg.appendChild(axesGroup);
+
+                // Create summary statistics
+                const currentTonnage = recentData[recentData.length - 1];
+                const previousTonnage = recentData.length > 1 ? recentData[recentData.length - 2] : 0;
+                const averageTonnage = recentData.reduce((sum, val) => sum + val, 0) / recentData.length;
+                const bestTonnage = Math.max(...recentData);
+                
+                const change = previousTonnage ? currentTonnage - previousTonnage : 0;
+                const changePercent = previousTonnage ? ((change / previousTonnage) * 100) : 0;
+                
+                let trendClass = 'neutral';
+                let trendText = 'No change';
+                if (change > 0) {
+                    trendClass = 'positive';
+                    trendText = `+${Math.round(change)} (+${changePercent.toFixed(1)}%)`;
+                } else if (change < 0) {
+                    trendClass = 'negative';
+                    trendText = `${Math.round(change)} (${changePercent.toFixed(1)}%)`;
+                }
+
+                summary.innerHTML = `
+                    <div class="tonnage-stat">
+                        <div class="tonnage-stat-label">Latest</div>
+                        <div class="tonnage-stat-value">${Math.round(currentTonnage)}</div>
+                        <div class="tonnage-trend ${trendClass}">${trendText}</div>
+                    </div>
+                    <div class="tonnage-stat">
+                        <div class="tonnage-stat-label">Average</div>
+                        <div class="tonnage-stat-value">${Math.round(averageTonnage)}</div>
+                        <div class="tonnage-trend neutral">Last ${recentData.length} workouts</div>
+                    </div>
+                    <div class="tonnage-stat">
+                        <div class="tonnage-stat-label">Best</div>
+                        <div class="tonnage-stat-value">${Math.round(bestTonnage)}</div>
+                        <div class="tonnage-trend positive">Personal Record</div>
+                    </div>
+                `;
+            }
+
+            filterChart(exerciseId) {
+                this.chartFilterExercise = exerciseId;
+                this.renderProgressChart();
             }
 
             showScreen(screenId) {
@@ -1477,6 +1995,269 @@
                     tut: this.tutSeconds
                 });
 
+                // Show exercise statistics before continuing
+                this.showExerciseStats(exercise, weight, this.tutSeconds);
+            }
+
+            showExerciseStats(exercise, currentWeight, currentTut) {
+                // Update header
+                document.getElementById('statsExerciseTitle').textContent = `${exercise.name} Complete!`;
+                document.getElementById('statsExerciseSubtitle').textContent = 'Performance Analysis';
+
+                // Get historical data for this exercise
+                const exerciseData = this.historicalData[exercise.id] || [];
+                const previousEntry = exerciseData.length > 0 ? exerciseData[exerciseData.length - 1] : null;
+                const bestEntry = this.getBestPerformance(exerciseData);
+
+                // Create performance comparison
+                this.renderPerformanceComparison(currentWeight, currentTut, previousEntry, bestEntry);
+
+                // Render exercise tonnage chart
+                this.renderExerciseTonnageChart(exercise.id, currentWeight, currentTut);
+
+                // Generate recommendation
+                this.generateRecommendation(currentWeight, currentTut, exerciseData);
+
+                this.showScreen('exerciseStatsScreen');
+            }
+
+            getBestPerformance(exerciseData) {
+                if (!exerciseData || exerciseData.length === 0) return null;
+                
+                // Calculate tonnage (weight × TUT) for each entry and find the best
+                let bestEntry = exerciseData[0];
+                let bestTonnage = bestEntry.weight * bestEntry.tut;
+                
+                exerciseData.forEach(entry => {
+                    const tonnage = entry.weight * entry.tut;
+                    if (tonnage > bestTonnage) {
+                        bestTonnage = tonnage;
+                        bestEntry = entry;
+                    }
+                });
+                
+                return bestEntry;
+            }
+
+            renderPerformanceComparison(currentWeight, currentTut, previousEntry, bestEntry) {
+                const container = document.getElementById('performanceComparison');
+                container.innerHTML = '';
+
+                // Current session data
+                const currentTonnage = currentWeight * currentTut;
+
+                // Previous session comparison
+                let prevWeightChange = '', prevTutChange = '', prevTonnageChange = '';
+                if (previousEntry) {
+                    const weightDiff = currentWeight - previousEntry.weight;
+                    const tutDiff = currentTut - previousEntry.tut;
+                    const tonnageDiff = currentTonnage - (previousEntry.weight * previousEntry.tut);
+
+                    prevWeightChange = this.formatChange(weightDiff, 'kg');
+                    prevTutChange = this.formatChange(tutDiff, 's');
+                    prevTonnageChange = this.formatChange(tonnageDiff, '');
+                }
+
+                // Best ever comparison
+                let bestWeightChange = '', bestTutChange = '', bestTonnageChange = '';
+                if (bestEntry) {
+                    const bestTonnage = bestEntry.weight * bestEntry.tut;
+                    const weightDiff = currentWeight - bestEntry.weight;
+                    const tutDiff = currentTut - bestEntry.tut;
+                    const tonnageDiff = currentTonnage - bestTonnage;
+
+                    bestWeightChange = this.formatChange(weightDiff, 'kg');
+                    bestTutChange = this.formatChange(tutDiff, 's');
+                    bestTonnageChange = this.formatChange(tonnageDiff, '');
+                }
+
+                container.innerHTML = `
+                    <div class="comparison-item">
+                        <div class="comparison-label">Today's Weight</div>
+                        <div class="comparison-value">${currentWeight}kg</div>
+                        <div class="comparison-change ${this.getChangeClass(prevWeightChange)}">${prevWeightChange || 'First session'}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Today's TUT</div>
+                        <div class="comparison-value">${currentTut}s</div>
+                        <div class="comparison-change ${this.getChangeClass(prevTutChange)}">${prevTutChange || 'First session'}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Today's Tonnage</div>
+                        <div class="comparison-value">${Math.round(currentTonnage)}</div>
+                        <div class="comparison-change ${this.getChangeClass(prevTonnageChange)}">${prevTonnageChange || 'First session'}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Best Ever</div>
+                        <div class="comparison-value">${bestEntry ? Math.round(bestEntry.weight * bestEntry.tut) : 'N/A'}</div>
+                        <div class="comparison-change ${this.getChangeClass(bestTonnageChange)}">${bestTonnageChange || bestEntry ? `${bestEntry.weight}kg × ${bestEntry.tut}s` : 'This is your first!'}</div>
+                    </div>
+                `;
+            }
+
+            formatChange(diff, unit) {
+                if (diff === 0) return '±0' + unit;
+                const sign = diff > 0 ? '+' : '';
+                return `${sign}${Math.round(diff)}${unit}`;
+            }
+
+            getChangeClass(changeText) {
+                if (!changeText || changeText.includes('First') || changeText.includes('N/A')) return 'neutral';
+                if (changeText.startsWith('+')) return 'positive';
+                if (changeText.startsWith('-')) return 'negative';
+                return 'neutral';
+            }
+
+            renderExerciseTonnageChart(exerciseId, currentWeight, currentTut) {
+                const svg = document.getElementById('exerciseTonnageChart');
+                svg.innerHTML = '';
+
+                // Get exercise data including current session
+                const exerciseData = [...(this.historicalData[exerciseId] || [])];
+                exerciseData.push({ weight: currentWeight, tut: currentTut }); // Include current session
+
+                if (exerciseData.length === 0) return;
+
+                // Chart dimensions
+                const width = 300;
+                const height = 100;
+                const margin = { top: 10, right: 15, bottom: 20, left: 40 };
+                const chartWidth = width - margin.left - margin.right;
+                const chartHeight = height - margin.top - margin.bottom;
+
+                // Calculate tonnage for each entry
+                const tonnageData = exerciseData.map((entry, index) => ({
+                    tonnage: entry.weight * entry.tut,
+                    isCurrent: index === exerciseData.length - 1
+                }));
+
+                const maxTonnage = Math.max(...tonnageData.map(d => d.tonnage));
+                const minTonnage = Math.min(...tonnageData.map(d => d.tonnage));
+                const range = maxTonnage - minTonnage;
+                const paddedMax = maxTonnage + (range * 0.1) || maxTonnage * 1.1 || 100;
+                const paddedMin = Math.max(0, minTonnage - (range * 0.1));
+
+                // Create scales
+                const xScale = (index) => margin.left + (index / Math.max(1, tonnageData.length - 1)) * chartWidth;
+                const yScale = (tonnage) => height - margin.bottom - ((tonnage - paddedMin) / (paddedMax - paddedMin)) * chartHeight;
+                const barWidth = Math.max(8, chartWidth / tonnageData.length * 0.7);
+
+                // Draw grid lines
+                const gridGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                gridGroup.setAttribute('opacity', '0.1');
+                
+                for (let i = 0; i <= 3; i++) {
+                    const y = height - margin.bottom - (i / 3) * chartHeight;
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', margin.left);
+                    line.setAttribute('y1', y);
+                    line.setAttribute('x2', width - margin.right);
+                    line.setAttribute('y2', y);
+                    line.setAttribute('stroke', '#ffffff');
+                    gridGroup.appendChild(line);
+                }
+                svg.appendChild(gridGroup);
+
+                // Draw bars
+                tonnageData.forEach((data, index) => {
+                    const x = xScale(index) - barWidth / 2;
+                    const y = yScale(data.tonnage);
+                    const barHeight = height - margin.bottom - y;
+
+                    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rect.setAttribute('x', x);
+                    rect.setAttribute('y', y);
+                    rect.setAttribute('width', barWidth);
+                    rect.setAttribute('height', Math.max(2, barHeight));
+                    rect.setAttribute('fill', data.isCurrent ? '#3cfcfc' : '#9cfc3c');
+                    rect.setAttribute('opacity', data.isCurrent ? '1' : '0.7');
+                    rect.setAttribute('rx', '2');
+                    svg.appendChild(rect);
+
+                    // Add value label for current session
+                    if (data.isCurrent) {
+                        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        label.setAttribute('x', x + barWidth / 2);
+                        label.setAttribute('y', y - 5);
+                        label.setAttribute('text-anchor', 'middle');
+                        label.setAttribute('fill', '#3cfcfc');
+                        label.setAttribute('font-size', '10');
+                        label.setAttribute('font-weight', '600');
+                        label.textContent = Math.round(data.tonnage);
+                        svg.appendChild(label);
+                    }
+                });
+
+                // Draw axes
+                const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                xAxis.setAttribute('x1', margin.left);
+                xAxis.setAttribute('y1', height - margin.bottom);
+                xAxis.setAttribute('x2', width - margin.right);
+                xAxis.setAttribute('y2', height - margin.bottom);
+                xAxis.setAttribute('stroke', '#ffffff');
+                xAxis.setAttribute('stroke-width', '1');
+                xAxis.setAttribute('opacity', '0.3');
+                svg.appendChild(xAxis);
+
+                const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                yAxis.setAttribute('x1', margin.left);
+                yAxis.setAttribute('y1', margin.top);
+                yAxis.setAttribute('x2', margin.left);
+                yAxis.setAttribute('y2', height - margin.bottom);
+                yAxis.setAttribute('stroke', '#ffffff');
+                yAxis.setAttribute('stroke-width', '1');
+                yAxis.setAttribute('opacity', '0.3');
+                svg.appendChild(yAxis);
+            }
+
+            generateRecommendation(currentWeight, currentTut, exerciseData) {
+                const container = document.getElementById('exerciseRecommendation');
+                const currentTonnage = currentWeight * currentTut;
+                
+                if (!exerciseData || exerciseData.length === 0) {
+                    container.innerHTML = `
+                        <div class="recommendation-text">Great Job!</div>
+                        <div class="recommendation-explanation">This is your first session for this exercise. Establish your baseline and focus on proper form.</div>
+                    `;
+                    return;
+                }
+
+                const previousEntry = exerciseData[exerciseData.length - 1];
+                const previousTonnage = previousEntry.weight * previousEntry.tut;
+                const tonnageDiff = currentTonnage - previousTonnage;
+                const percentChange = ((tonnageDiff / previousTonnage) * 100);
+
+                let recommendationText = '';
+                let explanationText = '';
+
+                if (tonnageDiff > 0) {
+                    if (percentChange > 10) {
+                        recommendationText = "Excellent Progress!";
+                        explanationText = "Significant improvement in tonnage. You're responding well to the training stimulus. Continue with current intensity.";
+                    } else {
+                        recommendationText = "Good Progress!";
+                        explanationText = "Steady improvement detected. Your body is adapting well to the training load.";
+                    }
+                } else if (tonnageDiff < 0) {
+                    if (Math.abs(percentChange) > 10) {
+                        recommendationText = "Prioritize Recovery";
+                        explanationText = "Lower tonnage indicates potential fatigue. Ensure adequate rest, nutrition, and consider extending recovery time before next session.";
+                    } else {
+                        recommendationText = "Minor Setback";
+                        explanationText = "Small decrease in tonnage is normal. Focus on form and listen to your body's recovery signals.";
+                    }
+                } else {
+                    recommendationText = "Maintain Current Level";
+                    explanationText = "Consistent performance indicates you're maintaining your strength level. This is a solid foundation for future progress.";
+                }
+
+                container.innerHTML = `
+                    <div class="recommendation-text">${recommendationText}</div>
+                    <div class="recommendation-explanation">${explanationText}</div>
+                `;
+            }
+
+            continueFromStats() {
                 this.currentExerciseIndex++;
                 
                 if (this.currentExerciseIndex < this.exercises.length) {
@@ -1577,6 +2358,7 @@
                 this.showScreen('home');
                 this.updateHomeExerciseStats();
                 this.renderProgressChart(); // Re-render chart when returning home
+                this.renderTonnageChart(); // Re-render tonnage chart when returning home
             }
 
             updateHomeExerciseStats() {
