@@ -243,6 +243,45 @@
             margin-top: 2px;
         }
 
+        .bodyweight-stats {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .bodyweight-stat-label {
+            font-size: 11px;
+            color: #b8c5d1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .bodyweight-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #9cfc3c;
+            margin-bottom: 4px;
+        }
+
+        .bodyweight-change {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .bodyweight-change.positive {
+            color: #ff6b6b;
+        }
+
+        .bodyweight-change.negative {
+            color: #9cfc3c;
+        }
+
+        .bodyweight-change.neutral {
+            color: #b8c5d1;
+        }
+
         .tonnage-trend.positive {
             color: #3cfcfc;
         }
@@ -631,6 +670,7 @@
             min-height: 100vh;
             padding: 24px;
             text-align: center;
+            transition: background 0.5s ease;
         }
 
         .timer-exercise-name {
@@ -648,6 +688,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: color 0.3s ease;
         }
 
         .countdown-display {
@@ -873,6 +914,74 @@
             font-weight: 600;
         }
 
+        .bodyweight-section {
+            margin: 24px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(156, 252, 60, 0.2);
+        }
+
+        .bodyweight-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .bodyweight-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .bodyweight-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(156, 252, 60, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .bodyweight-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .bodyweight-input:focus {
+            border-color: #9cfc3c;
+            box-shadow: 0 0 0 3px rgba(156, 252, 60, 0.1);
+        }
+
+        .save-bodyweight-button {
+            background: linear-gradient(135deg, #9cfc3c, #3cfcfc);
+            color: #1a2332;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .save-bodyweight-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(156, 252, 60, 0.3);
+        }
+
+        .save-bodyweight-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .finish-button {
             background: linear-gradient(135deg, #9cfc3c, #3cfcfc);
             color: #1a2332;
@@ -1055,6 +1164,14 @@
                 </div>
                 <div class="tonnage-summary" id="tonnageSummary">
                     <!-- Tonnage stats will be populated here -->
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3 class="progress-title">Bodyweight Tracking</h3>
+                <div class="bodyweight-stats" id="bodyweightStats">
+                    <div class="bodyweight-stat-label">No Data</div>
+                    <div class="bodyweight-stat-value">Log your first weight</div>
                 </div>
             </div>
 
@@ -1245,6 +1362,20 @@
                     <div id="todaysResults"></div>
                 </div>
 
+                <div class="bodyweight-section">
+                    <h3 class="bodyweight-title">Log Today's Bodyweight</h3>
+                    <div class="bodyweight-input-container">
+                        <input type="number" 
+                               id="bodyweightInput" 
+                               class="bodyweight-input" 
+                               placeholder="Enter weight (kg)" 
+                               step="0.1"
+                               min="30"
+                               max="200">
+                        <button class="save-bodyweight-button" id="saveBodyweight">Save</button>
+                    </div>
+                </div>
+
                 <button class="finish-button" id="finishWorkout">Tilbage til Hjem</button>
             </div>
         </div>
@@ -1324,6 +1455,9 @@
                 // Store previous workout tonnages
                 this.workoutTonnageHistory = [];
 
+                // Store bodyweight data
+                this.bodyweightHistory = [];
+
                 this.currentExerciseIndex = 0;
                 this.workoutResults = [];
                 this.countdownTimer = null;
@@ -1340,6 +1474,7 @@
                 this.updateHomeExerciseStats();
                 this.renderProgressChart();
                 this.renderTonnageChart();
+                this.updateBodyweightStats();
             }
 
             loadSavedData() {
@@ -1354,6 +1489,12 @@
                     const savedTonnageHistory = localStorage.getItem('bodyByScience_workoutTonnageHistory');
                     if (savedTonnageHistory) {
                         this.workoutTonnageHistory = JSON.parse(savedTonnageHistory);
+                    }
+
+                    // Load bodyweight history
+                    const savedBodyweightHistory = localStorage.getItem('bodyByScience_bodyweightHistory');
+                    if (savedBodyweightHistory) {
+                        this.bodyweightHistory = JSON.parse(savedBodyweightHistory);
                     }
 
                     // Load and update exercise last values
@@ -1379,6 +1520,9 @@
                     
                     // Save workout tonnage history
                     localStorage.setItem('bodyByScience_workoutTonnageHistory', JSON.stringify(this.workoutTonnageHistory));
+                    
+                    // Save bodyweight history
+                    localStorage.setItem('bodyByScience_bodyweightHistory', JSON.stringify(this.bodyweightHistory));
                     
                     // Save exercise last values
                     const exerciseData = {};
@@ -1409,6 +1553,7 @@
                 document.getElementById('backToHome').addEventListener('click', () => this.goHome());
                 document.getElementById('addEntryBtn').addEventListener('click', () => this.addNewEntry());
                 document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllData());
+                document.getElementById('saveBodyweight').addEventListener('click', () => this.saveBodyweight());
             }
 
             renderProgressChart() {
@@ -1518,6 +1663,32 @@
                 axesGroup.appendChild(yLabel);
 
                 svg.appendChild(axesGroup);
+
+                // Draw optimal TUT zone (60-90 seconds)
+                if (maxTut > 60) { // Only show if chart extends beyond optimal range
+                    const optimalZone = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    const x1 = xScale(60);
+                    const x2 = xScale(Math.min(90, maxTut));
+                    
+                    optimalZone.setAttribute('x', x1);
+                    optimalZone.setAttribute('y', margin.top);
+                    optimalZone.setAttribute('width', x2 - x1);
+                    optimalZone.setAttribute('height', chartHeight);
+                    optimalZone.setAttribute('fill', '#9cfc3c');
+                    optimalZone.setAttribute('opacity', '0.2');
+                    svg.appendChild(optimalZone);
+
+                    // Add optimal zone label
+                    const zoneLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    zoneLabel.setAttribute('x', (x1 + x2) / 2);
+                    zoneLabel.setAttribute('y', margin.top + 15);
+                    zoneLabel.setAttribute('text-anchor', 'middle');
+                    zoneLabel.setAttribute('fill', '#9cfc3c');
+                    zoneLabel.setAttribute('font-size', '10');
+                    zoneLabel.setAttribute('font-weight', '600');
+                    zoneLabel.textContent = 'Optimal Zone';
+                    svg.appendChild(zoneLabel);
+                }
 
                 // Draw exercise data
                 this.exercises.forEach((exercise, exerciseIndex) => {
@@ -1979,12 +2150,30 @@
             updateTutDisplay() {
                 const minutes = Math.floor(this.tutSeconds / 60);
                 const seconds = this.tutSeconds % 60;
-                document.getElementById('tutTimer').textContent = 
+                const timerElement = document.getElementById('tutTimer');
+                const timerScreen = document.querySelector('.timer-screen');
+                
+                timerElement.textContent = 
                     `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Change background color when in optimal TUT range (60-90 seconds)
+                if (this.tutSeconds >= 60 && this.tutSeconds <= 90) {
+                    timerScreen.style.background = 'linear-gradient(135deg, rgba(156, 252, 60, 0.2), rgba(156, 252, 60, 0.1))';
+                    timerElement.style.color = '#9cfc3c';
+                } else {
+                    timerScreen.style.background = '';
+                    timerElement.style.color = '#3cfcfc';
+                }
             }
 
             stopExercise() {
                 clearInterval(this.tutTimer);
+                
+                // Reset timer screen background
+                const timerScreen = document.querySelector('.timer-screen');
+                const timerElement = document.getElementById('tutTimer');
+                timerScreen.style.background = '';
+                timerElement.style.color = '#3cfcfc';
                 
                 const weight = document.getElementById('weightValue').value;
                 const exercise = this.exercises[this.currentExerciseIndex];
@@ -2359,6 +2548,7 @@
                 this.updateHomeExerciseStats();
                 this.renderProgressChart(); // Re-render chart when returning home
                 this.renderTonnageChart(); // Re-render tonnage chart when returning home
+                this.updateBodyweightStats(); // Update bodyweight stats when returning home
             }
 
             updateHomeExerciseStats() {
@@ -2476,6 +2666,82 @@
                 }
             }
 
+            saveBodyweight() {
+                const bodyweightInput = document.getElementById('bodyweightInput');
+                const weight = parseFloat(bodyweightInput.value);
+
+                if (isNaN(weight) || weight < 30 || weight > 200) {
+                    alert('Please enter a valid bodyweight between 30-200 kg');
+                    return;
+                }
+
+                // Add bodyweight entry with current date
+                const today = new Date().toISOString().split('T')[0];
+                this.bodyweightHistory.push({
+                    date: today,
+                    weight: weight
+                });
+
+                // Sort by date (newest first)
+                this.bodyweightHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Save to localStorage
+                this.saveData();
+
+                // Clear input and show success
+                bodyweightInput.value = '';
+                const saveButton = document.getElementById('saveBodyweight');
+                const originalText = saveButton.textContent;
+                saveButton.textContent = 'Saved!';
+                saveButton.disabled = true;
+
+                setTimeout(() => {
+                    saveButton.textContent = originalText;
+                    saveButton.disabled = false;
+                }, 2000);
+
+                // Update home screen to show new bodyweight stats
+                this.updateBodyweightStats();
+            }
+
+            updateBodyweightStats() {
+                const statsElement = document.getElementById('bodyweightStats');
+                if (!statsElement) return;
+
+                if (this.bodyweightHistory.length === 0) {
+                    statsElement.innerHTML = '<div class="bodyweight-stat-label">No Data</div><div class="bodyweight-stat-value">Log your first weight</div>';
+                    return;
+                }
+
+                const latest = this.bodyweightHistory[0];
+                const latestWeight = latest.weight;
+                
+                let changeText = '';
+                let changeClass = '';
+                
+                if (this.bodyweightHistory.length > 1) {
+                    const previous = this.bodyweightHistory[1];
+                    const change = latestWeight - previous.weight;
+                    
+                    if (change > 0) {
+                        changeText = `+${change.toFixed(1)} kg`;
+                        changeClass = 'positive';
+                    } else if (change < 0) {
+                        changeText = `${change.toFixed(1)} kg`;
+                        changeClass = 'negative';
+                    } else {
+                        changeText = 'No change';
+                        changeClass = 'neutral';
+                    }
+                }
+
+                statsElement.innerHTML = `
+                    <div class="bodyweight-stat-label">Current Weight</div>
+                    <div class="bodyweight-stat-value">${latestWeight} kg</div>
+                    ${changeText ? `<div class="bodyweight-change ${changeClass}">${changeText}</div>` : ''}
+                `;
+            }
+
             clearAllData() {
                 if (confirm('Are you sure you want to clear ALL historical data? This cannot be undone.')) {
                     // Clear all historical data
@@ -2492,8 +2758,12 @@
                     // Clear workout tonnage history
                     this.workoutTonnageHistory = [];
                     
+                    // Clear bodyweight history
+                    this.bodyweightHistory = [];
+                    
                     this.renderMemoryList();
                     this.updateHomeExerciseStats();
+                    this.updateBodyweightStats();
                     
                     // Save cleared data to localStorage
                     this.saveData();
